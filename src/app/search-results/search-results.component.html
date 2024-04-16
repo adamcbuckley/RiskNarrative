@@ -3,11 +3,16 @@
 
   @for (result of searchResults.items; track result.company_number) {
     <div class="my-4">
-        <strong><a href="#">{{ result.title }}</a></strong><br/>
-        <strong>{{result.company_number}}</strong> - Incorporated on {{result.date_of_creation | date:"d MMMM yyyy"}}<br/>
-        {{result.address_snippet}}
+      <strong
+        ><a [routerLink]="['/company-detail', result.company_number]">{{
+          result.title
+        }}</a></strong
+      ><br />
+      <strong>{{ result.company_number }}</strong> - Incorporated on
+      {{ result.date_of_creation | date: "d MMMM yyyy" }}<br />
+      {{ result.address_snippet }}
     </div>
   } @empty {
-    <div class="text-muted">No results found</div>
+    <div class="alert alert-secondary fst-italic" role="alert">No results found</div>
   }
 </div>
