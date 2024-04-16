@@ -5,9 +5,10 @@
     <div class="w-50 text-center">
       <input
         [(ngModel)]="searchString"
-        class="form-control placeholder-center"
+        class="form-control"
         [required]="true"
         placeholder="Company Name or Number"
+        (keyup.enter)="search()"
       />
 
       <a type="button" class="btn btn-primary mt-5 px-5" (click)="search()">Search</a>
