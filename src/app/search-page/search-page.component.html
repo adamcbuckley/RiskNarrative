@@ -2,16 +2,38 @@
   <div
     class="search-container d-flex align-items-center justify-content-center"
   >
-    <div class="w-50 text-center">
+    <form
+      class="w-50 text-center search-panel"
+      #searchForm="ngForm"
+      (ngSubmit)="searchForm.form.valid && search()"
+      id="itemForm"
+      name="itemForm"
+      novalidate
+    >
       <input
+        id="searchString"
+        name="searchString"
+        #searchStringInput="ngModel"
         [(ngModel)]="searchString"
-        class="form-control"
+        class="form-control placeholder-center"
         [required]="true"
         placeholder="Company Name or Number"
         (keyup.enter)="search()"
+        required
       />
 
-      <a type="button" class="btn btn-primary mt-5 px-5" (click)="search()">Search</a>
-    </div>
+      <div>
+        <small
+          class="text-danger"
+          [class.invisible]="!searchForm.submitted || !searchStringInput.errors"
+        >
+          <span>Please enter a search string</span>
+        </small>
+      </div>
+
+      <div>
+        <button type="submit" class="btn btn-primary mt-4 px-5">Search</button>
+      </div>
+    </form>
   </div>
 </div>
