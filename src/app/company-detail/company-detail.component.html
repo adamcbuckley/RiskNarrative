@@ -1,19 +1,8 @@
 <div class="container pt-4">
   @if (companyDetail) {
-    <h1 class="mb-0">{{ companyDetail.title }}</h1>
-    <div class="mb-5 row">
-      <label for="company_number" class="col-sm-3 col-form-label"
-        >Company number</label
-      >
-      <div class="col-sm-9">
-        <input
-          type="text"
-          readonly
-          class="form-control-plaintext fw-bold"
-          id="company_number"
-          value="{{ companyDetail.company_number }}"
-        />
-      </div>
+    <h1 class="mb-1">{{ companyDetail.title }}</h1>
+    <div class="mb-5">
+      Company number <strong>{{ companyDetail.company_number }}</strong>
     </div>
 
     <div class="mb-2 row">

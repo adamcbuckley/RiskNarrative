@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
-import { SearchResults } from "../entities";
-import { map } from "rxjs";
+import {OfficerList, SearchResults} from "../entities";
+import { catchError, map, of } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -18,6 +18,22 @@ export class CompanyService {
           headers: { "x-api-key": environment.apiKey },
         },
       )
-      .pipe(map((r) => r.items ? r.items[0] : undefined));
+      .pipe(map((r) => (r.items ? r.items[0] : undefined)));
+  }
+
+  getOfficersList(companyNumber: string) {
+    return this.http
+      .get<OfficerList>(
+        `${environment.baseUrl}/Officers?CompanyNumber=${companyNumber}`,
+        {
+          headers: { "x-api-key": environment.apiKey },
+        },
+      )
+      .pipe(
+        catchError((err) => {
+          console.log(err.message);
+          return of(undefined);
+        }),
+      );
   }
 }
